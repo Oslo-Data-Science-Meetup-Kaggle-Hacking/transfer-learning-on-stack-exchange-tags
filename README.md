@@ -10,9 +10,9 @@ A (WIP) solution to [transfer-learning-on-stack-exchange-tags](https://www.kaggl
 ## get data
 
 ```
-pip install --user requirements.txt
-cd data
-./get_data.py username
+$ pip install --user requirements.txt
+$ cd data
+$ ./get_data.py username
 ```
 
 ## read data
@@ -20,4 +20,11 @@ cd data
 ```
 $ python -i read.py
 >>> data['biology'][['title','tags']].head(5)
+```
+
+## clean data
+
+```
+$ python -i read.py
+>>> data['biology'][['content', 'content_text']].head(10)
 ```
