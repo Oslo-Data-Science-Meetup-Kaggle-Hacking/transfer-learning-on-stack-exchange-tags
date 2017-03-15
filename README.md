@@ -14,3 +14,10 @@ pip install --user requirements.txt
 cd data
 ./get_data.py username
 ```
+
+## read data
+
+```
+$ python -i read.py
+>>> data['biology'][['title','tags']].head(5)
+```
