@@ -1,5 +1,10 @@
-# transfer-learning-on-stack-exchange-tags
-kaggle: transfer-learning-on-stack-exchange-tags
+# Transfer Learning on Stack Exchange Tags
+
+by
+[Oslo Data Science Meetup](https://www.meetup.com/Oslo-Data-Science/)
+Kaggle Hacking Group,
+
+A (WIP) solution to [transfer-learning-on-stack-exchange-tags](https://www.kaggle.com/c/transfer-learning-on-stack-exchange-tags/) on Kaggle.
 
 
 ## get data
