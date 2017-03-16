@@ -25,6 +25,6 @@ $ python -i read.py
 ## clean data
 
 ```
-$ python -i read.py
->>> data['biology'][['content', 'content_text']].head(10)
+$ python -i clean.py
+>>> data['biology'][['title', 'title_words', 'content_text_words']].head(10)
 ```

@@ -3,12 +3,29 @@
 
 example:
 $ python -i clean.py
->>> data['biology'][['content', 'content_text']].head(10)
+>>> data['biology'][['title', 'title_words', 'content_text_words']].head(10)
 """
 
 from read import read_all
 from bs4 import BeautifulSoup
 import re
+
+
+def __extract_words(df):
+    r"""Extract words from text, lowercased.
+
+    Has a very leniant definition of a word. Allows:
+    e.g. - as a word,
+    i.e. - as a word,
+    I'm - as a word, replacing I or m for any none-zero-number of \w characters
+    and any uninterupted sequence of word characters (\w),
+    incliding but not limited to numbers.
+    """
+    extractr = re.compile('(e\.g\.|i\.e\.|\w+\'\w+|\w+)')
+
+    def get_words(text):
+        return ' '.join(re.findall(extractr, text.lower()))
+    return df.applymap(get_words)
 
 
 def __extract_text_html_re(df):
@@ -20,8 +37,7 @@ def __extract_text_html_re(df):
 
     def get_text(html):
         return re.sub(cleanr, '', html)
-    cleaned = df.applymap(get_text)
-    return cleaned
+    return df.applymap(get_text)
 
 
 def __extract_text_html_soup(df):
@@ -42,7 +58,12 @@ def __extract_text_html_soup(df):
 
 def clean_df(df):
     """Clean DataFrame."""
-    return df.join(__extract_text_html_re(df[['content']]), rsuffix='_text')
+    # concat content_text:
+    df = df.join(__extract_text_html_re(df[['content']]), rsuffix='_text')
+    # concat content_words:
+    df = df.join(__extract_words(df[['title', 'content_text']]),
+                 rsuffix='_words')
+    return df
 
 
 def clean_all(data):
